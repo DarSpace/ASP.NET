@@ -1,0 +1,31 @@
+﻿
+@model IEnumerable<ProductModel>
+
+
+<style>
+    td
+    {
+        
+        padding: 5px;
+    }
+    
+</style>
+
+
+<table>
+    @foreach (var i in Model)
+    {
+        <tr>
+            <td>
+                @i.NameProducts
+            </td>
+            <td>
+                @i.Price
+            </td>
+            <td>
+                @i.Descriptions
+            </td>
+        </tr>
+    }
+
+</table>
