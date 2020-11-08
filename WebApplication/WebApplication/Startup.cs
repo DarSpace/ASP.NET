@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using WebApplication.Models;
 using WebApplication9.Models;
+using Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns;
 
 namespace WebApplication
 {
@@ -29,7 +30,7 @@ namespace WebApplication
         {
             services.AddRazorPages();
             services.AddTransient<IProductRepository, EFProductRepository>();
-            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SportsStore")));
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration["Data:SportStoreProducts:ConnectionString"]));
 
         }
 
@@ -47,22 +48,24 @@ namespace WebApplication
             app.UseStaticFiles();// obs³uga treœci statycznych css, images, js
             app.UseRouting();
 
-            app.UseEndpoints(routes => routes.MapControllerRoute(
-            name: "default",
-            pattern: "{controller=Product}/{action=List}/{id?}")
-             );
+            app.UseEndpoints(routes => {
 
+                routes.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Product}/{action=List}/{id?}");
 
+                routes.MapControllerRoute(
+                    name: null,
+                    pattern: "Product/{category}",
+                    defaults: new
+                    {
+                        controller = "Product",
+                        action = "List",
+                    });
+            });
+   
             SeedData.EnsurePopulated(app);
-
-
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapGet("/", async context =>
-            //    {
-            //        await context.Response.WriteAsync("Hello World!");
-            //    });
-            //});
+    
         }
     }
 }
