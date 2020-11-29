@@ -49,7 +49,7 @@ namespace WebApplication9.Models
                     },
                     new Product
                     {
-                        Name = "Stadiom",
+                        Name = "Stadion",
                         Description = "Składany stadion na 35 000 osób",
                         Category = "Piłka nożna",
                         Price = 79500
