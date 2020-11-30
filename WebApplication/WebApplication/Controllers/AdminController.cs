@@ -25,7 +25,7 @@ namespace WebApplication.Controllers
            if (ModelState.IsValid)
             {
                 repository.SaveProduct(product);
-                TempData["message"] = $" SAVED{product.Name}";
+                TempData["message"] = $" Zapisano{product.Name}";
                 return RedirectToAction("Index");
             }
             else
