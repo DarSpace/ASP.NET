@@ -11,20 +11,20 @@ namespace WebApplication.Models
         public int ProductID { get; set; }
 
         [RegularExpression(@"^[A-Z]+[a-zA-Z0-9""'\s-]*$"), StringLength(50)]
-        [Display(Name = "Nazwa")]
+        [Display(Name = "Nazwa:")]
         public string Name { get; set; }
 
 
         [RegularExpression(@"^[A-Z]+[a-zA-Z0-9""'\s-]*$"), StringLength(2000)]
-        [Display(Name = "Opis")]
+        [Display(Name = "Opis:")]
         public string Description { get; set; }
 
 
         [Range(0.01, double.MaxValue, ErrorMessage ="Proszę podać dodatnią cene produktu")]
-        [Display(Name = "Cena")]
+        [Display(Name = "Cena:")]
         public decimal Price { get; set; }
 
-        [Display(Name = "Kategoria")]
+        [Display(Name = "Kategoria:")]
         public string Category { get; set; }
 
 
