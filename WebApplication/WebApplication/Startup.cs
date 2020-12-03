@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using WebApplication.Models;
 using WebApplication9.Models;
 using Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns;
+using WebApplication.Extensions;
 
 namespace WebApplication
 {
@@ -47,6 +48,7 @@ namespace WebApplication
             app.UseStatusCodePages();// Wyœwietla strony ze statusem b³êdu
             app.UseStaticFiles();// obs³uga treœci statycznych css, images, js
             app.UseRouting();
+            app.UseElapsedTimeMiddleware();
 
             app.UseEndpoints(routes => {
 
