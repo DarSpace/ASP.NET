@@ -13,6 +13,8 @@ using WebApplication.Models;
 using WebApplication9.Models;
 using Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns;
 using WebApplication.Extensions;
+using Microsoft.AspNetCore.Identity;
+
 
 namespace WebApplication
 {
@@ -33,7 +35,13 @@ namespace WebApplication
             services.AddTransient<IProductRepository, EFProductRepository>();
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration["Data:SportStoreProducts:ConnectionString"]));
 
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration["Data:SportStoreIdentity:ConnectionString"]));
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+
         }
+
+        
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -49,6 +57,7 @@ namespace WebApplication
             app.UseStaticFiles();// obs³uga treœci statycznych css, images, js
             app.UseRouting();
             app.UseElapsedTimeMiddleware();
+            app.UseAuthentication();
 
             app.UseEndpoints(routes => {
 
