@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
@@ -20,6 +21,7 @@ namespace WebApplication.Controllers
         {
             userManager = userMgr;
             signInManager = signInMgr;
+           // IdentitySeedData.EnsurePopulated(userMgr).Wait();
         }
         [AllowAnonymous]
         public ViewResult Login(string returnUrl)
@@ -49,7 +51,7 @@ namespace WebApplication.Controllers
                 }
             }
 
-            ModelState.AddModelError("", "Invalid name or password");
+            ModelState.AddModelError(" ", "Nieprawidłowa nazwa lub hasło");
                 return View(loginModel);
          }
                 public async Task<RedirectResult> Logout(string returnUrl = "/") {

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using WebApplication.Models;
 using WebApplication9.Models;
 using Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns;
-using WebApplication.Extensions;
+//using WebApplication.Extensions;
 using Microsoft.AspNetCore.Identity;
 
 
@@ -50,14 +50,16 @@ namespace WebApplication
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            
             app.UseRouting();
+           app.UseAuthentication();
+          
             app.UseDeveloperExceptionPage();// informacje szczegó³owe o b³êdach
             app.UseStatusCodePages();// Wyœwietla strony ze statusem b³êdu
             app.UseStaticFiles();// obs³uga treœci statycznych css, images, js
             app.UseRouting();
-            app.UseElapsedTimeMiddleware();
-            app.UseAuthentication();
+            //app.UseElapsedTimeMiddleware();
+            app.UseAuthorization();
 
             app.UseEndpoints(routes => {
 
