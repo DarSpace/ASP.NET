@@ -21,7 +21,9 @@ namespace WebApplication.Controllers
         {
             userManager = userMgr;
             signInManager = signInMgr;
-           // IdentitySeedData.EnsurePopulated(userMgr).Wait();
+            IdentitySeedData.EnsurePopulated(userMgr).Wait();
+
+
         }
         [AllowAnonymous]
         public ViewResult Login(string returnUrl)
