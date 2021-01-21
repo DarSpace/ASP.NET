@@ -14,6 +14,9 @@ using WebApplication9.Models;
 using Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns;
 //using WebApplication.Extensions;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
+using System.IO;
 
 
 namespace WebApplication
@@ -37,7 +40,8 @@ namespace WebApplication
 
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration["Data:SportStoreIdentity:ConnectionString"]));
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
-
+            services.AddControllers();
+            services.AddSwaggerGen();
         }
 
         
@@ -50,7 +54,10 @@ namespace WebApplication
             {
                 app.UseDeveloperExceptionPage();
             }
-            
+
+
+           
+
             app.UseRouting();
            app.UseAuthentication();
           
@@ -60,6 +67,15 @@ namespace WebApplication
             app.UseRouting();
             //app.UseElapsedTimeMiddleware();
             app.UseAuthorization();
+
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.RoutePrefix = "api";
+            });
+
 
             app.UseEndpoints(routes => {
 
