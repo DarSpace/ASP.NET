@@ -18,6 +18,7 @@ using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.IO;
 
+using WebApplication.Hubs;
 
 namespace WebApplication
 {
@@ -35,6 +36,7 @@ namespace WebApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddSignalR();
             services.AddTransient<IProductRepository, EFProductRepository>();
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration["Data:SportStoreProducts:ConnectionString"]));
 
@@ -56,7 +58,7 @@ namespace WebApplication
             }
 
 
-           
+         
 
             app.UseRouting();
            app.UseAuthentication();
@@ -76,8 +78,10 @@ namespace WebApplication
                 c.RoutePrefix = "api";
             });
 
-
+   
             app.UseEndpoints(routes => {
+
+                 routes.MapHub<ChatHub>("/chathub"); 
 
                 routes.MapControllerRoute(
                     name: "default",
