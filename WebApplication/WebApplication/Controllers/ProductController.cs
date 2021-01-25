@@ -17,12 +17,9 @@ namespace WebApplication.Controllers
         }
 
         public ViewResult ListAll() => View(productRepository.Products);
-
+        public ViewResult GetById(int id) => View(productRepository.Products.Single(p => p.ProductID == id));
         public ViewResult List(string category) => View(productRepository.Products.Where(p => p.Category == category));
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+       
     }
 }
