@@ -14,8 +14,8 @@ namespace WebApplication.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private UserManager<IdentityUser> userManager;
-        private SignInManager<IdentityUser> signInManager;
+        private UserManager<IdentityUser> userManager;   // obiekt który zarządza wszystkimi użytkownikami 
+        private SignInManager<IdentityUser> signInManager;  
         public AccountController(UserManager<IdentityUser> userMgr,
         SignInManager<IdentityUser> signInMgr)
         {
@@ -36,7 +36,7 @@ namespace WebApplication.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginModel loginModel)
+        public async Task<IActionResult> Login(LoginModel loginModel)  // autoryzacja użytkownika 
         {
             if (ModelState.IsValid)
             {
@@ -44,7 +44,7 @@ namespace WebApplication.Controllers
                 await userManager.FindByNameAsync(loginModel.Name);
                 if (user != null)
                 {
-                    await signInManager.SignOutAsync();
+                    await signInManager.SignOutAsync();      // najpierw jesli jest ktos zalogowany to go wylogowywujemy 
                     if ((await signInManager.PasswordSignInAsync(user,
                     loginModel.Password, false, false)).Succeeded)
                     {
@@ -56,8 +56,9 @@ namespace WebApplication.Controllers
             ModelState.AddModelError(" ", "Nieprawidłowa nazwa lub hasło");
                 return View(loginModel);
          }
-                public async Task<RedirectResult> Logout(string returnUrl = "/") {
-                    await signInManager.SignOutAsync();
+                public async Task<RedirectResult> Logout(string returnUrl = "/")
+                {
+                       await signInManager.SignOutAsync();
                        return Redirect(returnUrl);
                 }
      }

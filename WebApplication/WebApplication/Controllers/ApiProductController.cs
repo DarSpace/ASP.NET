@@ -24,10 +24,16 @@ namespace WebApplication.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public IEnumerable<Product> Get() => repository.Products;
+       
+        public ActionResult<Product> GetProducts()
+        {
 
-
-
+            var products = repository.Products;
+            if (products == null)
+                return NotFound();
+            return Ok(products);
+            // public IEnumerable<Product> GetProducts() => repository.Products;
+        }
 
         /// <summary>
         /// pobranie pojedynczego produktu po ID 
@@ -36,7 +42,7 @@ namespace WebApplication.Controllers
         /// <returns></returns>
         [HttpGet("{ProductId}")]
 
-        public ActionResult<Product> Get(int ProductId)
+        public ActionResult<Product> GetProduct(int ProductId)
         {
 
          var product = repository.Products.FirstOrDefault(p => p.ProductID == ProductId);
@@ -55,9 +61,13 @@ namespace WebApplication.Controllers
         /// <param name="product"></param>
        [HttpPost]
 
-    
-        public void Post([FromBody] Product product) =>
-        repository.SaveProduct(product);
+    public ActionResult<Product> SaveProduct(Product product)
+        {
+            repository.SaveProduct(product);
+            return Ok(product);
+        }
+        //public void Post([FromBody] Product product) =>
+        //repository.SaveProduct(product);
        
 
 
@@ -72,9 +82,20 @@ namespace WebApplication.Controllers
         /// </summary>
         /// <param name="product"></param>
         [HttpPut]
-        public void Put([FromBody] Product product) =>
+
+        public ActionResult<Product> Edit(Product product)
+        {
             repository.SaveProduct(product);
+            return Ok(product);
+        }
+
+        //public void Put([FromBody] Product product) =>
+        //    repository.SaveProduct(product);
        
+
+
+
+
 
 
         /// <summary>
