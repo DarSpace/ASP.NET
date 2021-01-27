@@ -1,0 +1,22 @@
+@page "/calculator"
+
+<input type = "number"  @bind="Value">
+<input type = "number" @bind="Value2" >
+
+<button class="btn btn-primary" @onclick= "getValue">Suma</button>
+
+    <p> @Suma </p>
+
+@code {
+
+    private double Value { get; set; }
+    private double Value2 { get; set; }
+
+    private double Suma { get; set; }
+
+    public void getValue(){
+        Suma = Value + Value2;
+    }
+
+
+}

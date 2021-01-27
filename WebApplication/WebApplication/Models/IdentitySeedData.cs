@@ -20,7 +20,7 @@ namespace WebApplication.Models
             {
                 user = new IdentityUser("Admin");
                 await userManager.CreateAsync(user, adminPassword);
-            }
+            } 
         }
 
     }

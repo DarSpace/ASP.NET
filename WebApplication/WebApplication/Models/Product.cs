@@ -10,12 +10,12 @@ namespace WebApplication.Models
     {
         public int ProductID { get; set; }
 
-        [RegularExpression(@"^[A-Z]+[a-zA-Z0-9""'\s-]*$"), StringLength(50)]
+        [ StringLength(50)]
         [Display(Name = "Nazwa:")]
         public string Name { get; set; }
 
 
-        [RegularExpression(@"^[A-Z]+[a-zA-Z0-9""'\s-]*$"), StringLength(2000)]
+        [ StringLength(2000)]
         [Display(Name = "Opis:")]
         public string Description { get; set; }
 

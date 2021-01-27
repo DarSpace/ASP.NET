@@ -7,7 +7,7 @@ using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
-    [Consumes("application/json")]
+    
     [Route("api/[controller]")]
     [ApiController]
     public class ApiProductController : Controller

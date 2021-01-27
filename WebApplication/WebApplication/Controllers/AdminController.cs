@@ -32,8 +32,8 @@ namespace WebApplication.Controllers
             }
             else
             {
-                
-                return View(product);
+              
+                return View("Edit",product);
             }
         }
 
