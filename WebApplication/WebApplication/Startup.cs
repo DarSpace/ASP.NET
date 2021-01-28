@@ -81,7 +81,8 @@ namespace WebApplication
    
             app.UseEndpoints(routes => {
 
-                 routes.MapHub<ChatHub>("/chathub"); 
+                 routes.MapHub<ChatHub>("/chathub");
+                 routes.MapHub<CounterHub>("/counterHub");
 
                 routes.MapControllerRoute(
                     name: "default",
